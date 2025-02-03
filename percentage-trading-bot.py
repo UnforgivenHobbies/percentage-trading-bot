@@ -21,9 +21,6 @@ DEFAULT_PERCENTAGE = 1  # Default percentage for buy/sell triggers
 min_notional_error_shown = False
 min_notional_filter_error_shown = False
 
-# Initialize exchange
-exchange = ccxt.binance()  # Replace with your preferred exchange
-
 # Function to get user input with prefilled values
 def get_user_input():
     # Prompt for symbol
@@ -89,12 +86,12 @@ def calculate_min_amount(symbol, min_notional):
     if min_notional is None:
         global min_notional_error_shown
         if not min_notional_error_shown:
-            print(f"Error: min_notional is None for {symbol}. Using default amount.")
+            print(f"Warning: min_notional is None for {symbol}. Using default amount.")
             min_notional_error_shown = True
         return amount  # Fallback to initial amount
 
     if current_price is None or current_price == 0:
-        print(f"Error: current_price is None or 0 for {symbol}. Using default amount.")
+        print(f"Warning: current_price is None or 0 for {symbol}. Using default amount.")
         return amount  # Avoid division by zero
 
     return min_notional / current_price
