@@ -1,6 +1,10 @@
 import ccxt
 import time
+import logging
 
+logging.basicConfig(filename='script.log', level=logging.INFO, format='%(asctime)s - %(message)s')
+
+logging.info('Script started')
 # Initialize the exchange
 exchange = ccxt.binance({
     'apiKey': '',  # Replace with your API key
@@ -170,3 +174,4 @@ if __name__ == "__main__":
         except Exception as e:
             print(f"An error occurred: {e}")
             time.sleep(5)  # Wait before retrying
+            logging.info('Script finished')
