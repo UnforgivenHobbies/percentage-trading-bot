@@ -134,31 +134,37 @@ def trading_strategy():
     if last_action is None:
         # First run: Sell immediately
         print(f"Initial sell: Selling {adjusted_amount} {symbol} at {current_price}.")
+        logging.info(f"Initial sell: Selling {adjusted_amount} {symbol} at {current_price}.")
         place_order(symbol, adjusted_amount, "sell")
         last_action = "sell"
         last_price = current_price
         desired_buy_price = current_price * (1 - percentage / 100)  # Set desired buy price (percentage below sell price)
         print(f"Desired buy price set to: {desired_buy_price}")
+        logging.info(f"Desired buy price set to: {desired_buy_price}")
     elif last_action == "sell":
         # After selling: Check if price dropped to desired buy price
         if current_price <= desired_buy_price:
             print(f"Price reached desired buy price. Buying {adjusted_amount} {symbol} at {current_price}.")
+            logging.info(f"Price reached desired buy price. Buying {adjusted_amount} {symbol} at {current_price}.")
             place_order(symbol, adjusted_amount, "buy")
             last_action = "buy"
             last_price = current_price
             desired_sell_price = current_price * (1 + percentage / 100)  # Set desired sell price (percentage above buy price)
             print(f"Desired sell price set to: {desired_sell_price}")
+            logging.info(f"Desired sell price set to: {desired_sell_price}")
         else:
             print(f"Waiting to buy. Current price: {current_price}, Desired buy price: {desired_buy_price}")
     elif last_action == "buy":
         # After buying: Check if price rose to desired sell price
         if current_price >= desired_sell_price:
             print(f"Price reached desired sell price. Selling {adjusted_amount} {symbol} at {current_price}.")
+            logging.info(f"Price reached desired sell price. Selling {adjusted_amount} {symbol} at {current_price}.")
             place_order(symbol, adjusted_amount, "sell")
             last_action = "sell"
             last_price = current_price
             desired_buy_price = current_price * (1 - percentage / 100)  # Set desired buy price (percentage below sell price)
             print(f"Desired buy price set to: {desired_buy_price}")
+            logging.info(f"Desired buy price set to: {desired_buy_price}")
         else:
             print(f"Waiting to sell. Current price: {current_price}, Desired sell price: {desired_sell_price}")
 
