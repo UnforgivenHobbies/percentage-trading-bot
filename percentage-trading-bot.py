@@ -7,8 +7,8 @@ logging.basicConfig(filename='script.log', level=logging.INFO, format='%(asctime
 logging.info('Script started')
 # Initialize the exchange
 exchange = ccxt.binance({
-    'apiKey': '',  # Replace with your API key
-    'secret': '',  # Replace with your secret key
+    'apiKey': 'your_api_key',  # Replace with your API key
+    'secret': 'your_secret_key',  # Replace with your secret key
     'enableRateLimit': True,
 })
 
